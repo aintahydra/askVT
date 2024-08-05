@@ -22,12 +22,12 @@ class AskVT:
     def process_line(self, row):
         n, m, desc = self.get_VT_freport(row[2])
         if n != 0:
-            return f"Found!: {row[0]}, {row[1]}, ({n}/{m}), \n{desc}"
+            return f"Found!: {row[0]}, {row[1]}, ({n}/{m}), {self.api_url+row[2]}\n{desc}"
         else:
             return ""
 
     def process_csv_parallel(self, filename):
-        with open(filename, mode='r', encoding='CP949') as file:
+        with open(filename, mode='r', encoding='UTF-8') as file:
             csv_reader = csv.reader(file)
 
             rows = list(csv_reader)
@@ -110,4 +110,3 @@ if __name__ == "__main__":
     a = AskVT()
     a.init()
     a.start(filename)
-    
